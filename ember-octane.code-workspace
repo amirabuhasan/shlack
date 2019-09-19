@@ -4,7 +4,10 @@
       "path": "."
     }
   ],
-  "settings": {},
+  "settings": {
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false
+  },
   "extensions": {
     "recommendations": [
       "lifeart.vscode-ember-unstable",
