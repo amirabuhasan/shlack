@@ -2,23 +2,16 @@ import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
-const AUTH_KEY = 'shlack-userid';
-
-export default class AuthService extends Service {
+export default class MockAuthService extends Service {
   @service router;
-
-  get currentUserId() {
-    return window.localStorage.getItem(AUTH_KEY);
-  }
-
+  currentUserId = null;
   loginWithUserId(userId) {
-    window.localStorage.setItem(AUTH_KEY, userId);
+    this.currentUserId = userId;
     this.router.transitionTo('teams');
   }
-
   @action
   logout() {
-    window.localStorage.removeItem(AUTH_KEY);
+    this.currentUserId = null;
     this.router.transitionTo('login');
   }
 }
