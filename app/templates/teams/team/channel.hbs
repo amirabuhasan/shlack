@@ -1,9 +1,11 @@
 <!-- Channel -->
-<main class="flex-1 flex flex-col bg-white overflow-hidden channel">
+<ChatContainer @channel={{this.model}} as |messages channelApi|>
   <ChannelHeader @title={{this.model.name}} @description={{this.model.description}} />
   {{format-timestamp "05-01-2019"}}
   <div class="py-4 flex-1 overflow-y-scroll channel-messages-list" role="list">
-    <Message />
+    {{#each messages as |m|}}
+      <Message @message={{m}} @deleteMessage={{fn channelApi.deleteMessage m.id}} />
+    {{/each}}
   </div>
-  <ChannelFooter />
-</main>
+  <ChannelFooter @sendMessage={{channelApi.createMessage}} />
+</ChatContainer>
